@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>Login</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
 <body>
+
+<h1>Login</h1>
+
+<form>
+
+    <input type="email" placeholder="Email">
+
+    <br><br>
+
+    <input type="password" placeholder="Password">
+
+    <br><br>
+
+    <button>Login</button>
+
+</form>
 
 </body>
 </html>

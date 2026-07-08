@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SERMS</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1>Welcome to SERMS</h1>
-<h2>Smart Enterprise Resource Management System</h2>
+<h1>🏢 Smart Enterprise Resource Management System</h1>
 
-<p>Your application is running successfully.</p>
+<p>
+    A centralized platform to manage Employees, Departments,
+    Inventory, Sales, Finance, Projects and Reports.
+</p>
+
+<br>
+
+<a th:href="@{/login}">
+    <button>Get Started</button>
+</a>
 
 </body>
 </html>
