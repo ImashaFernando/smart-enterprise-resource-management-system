@@ -1,5 +1,6 @@
 package com.serms.entity;
 
+import com.serms.enums.RoleType;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,14 +11,14 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
-    private String name;
+    private RoleType name;
 
     public Role() {
     }
 
-    public Role(Long id, String name) {
-        this.id = id;
+    public Role(RoleType name) {
         this.name = name;
     }
 
@@ -29,12 +30,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleType getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleType name) {
         this.name = name;
     }
-
 }
