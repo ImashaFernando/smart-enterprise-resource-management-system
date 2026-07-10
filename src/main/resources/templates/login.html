@@ -1,27 +1,93 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login · SERMS</title>
 
-    <title>Login</title>
-
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="login.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Login</h1>
+<div class="auth-wrap">
 
-<form th:action="@{/login}" method="post">
+    <div class="auth-aside">
+        <div class="brand">
+            <span class="brand-dot"></span>
+            <div>
+                <h2>SERMS</h2>
+                <span>ENTERPRISE CONSOLE</span>
+            </div>
+        </div>
 
-    <input type="email" name="username" placeholder="Email">
+        <div class="aside-copy">
+            <p class="eyebrow">Access Control</p>
+            <h1>One console for every part of the enterprise.</h1>
+            <p>Sign in to manage employees, inventory, finance, and projects from a single, unified workspace.</p>
 
-    <input type="password" name="password" placeholder="Password">
+            <ul class="modules-mini">
+                <li><span class="swatch" style="background:#4B5EFC"></span>Employees</li>
+                <li><span class="swatch" style="background:#8B5CF6"></span>Departments</li>
+                <li><span class="swatch" style="background:#12B8A6"></span>Inventory</li>
+                <li><span class="swatch" style="background:#E89B2E"></span>Projects</li>
+                <li><span class="swatch" style="background:#2F8FF0"></span>Finance</li>
+                <li><span class="swatch" style="background:#F0508A"></span>Reports</li>
+            </ul>
+        </div>
 
-    <button type="submit">Login</button>
+        <p class="aside-foot">SERMS v2.4 · SESSION ENCRYPTED</p>
+    </div>
 
-</form>
+    <div class="auth-form-panel">
+        <form class="auth-card" th:action="@{/login}" method="post">
+            <p class="eyebrow">Welcome back</p>
+            <h1>Sign in to your account</h1>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <div class="input-shell">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="admin@serms.com" required autocomplete="username">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <div class="input-shell">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+                    <button type="button" aria-label="Show password" onclick="togglePw(this)"><i class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <label class="remember">
+                    <input type="checkbox" name="remember"> Remember me
+                </label>
+                <a href="#" class="forgot">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary">
+                Login <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <p class="foot-note">PROTECTED BY SERMS ACCESS CONTROL</p>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    function togglePw(btn) {
+        var input = btn.parentElement.querySelector('input');
+        var icon = btn.querySelector('i');
+        var show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        icon.classList.toggle('fa-eye', !show);
+        icon.classList.toggle('fa-eye-slash', show);
+    }
+</script>
 
 </body>
 </html>

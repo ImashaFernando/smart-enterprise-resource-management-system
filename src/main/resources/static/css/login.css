@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --bg: #F3F4FA;
+    --surface: #FFFFFF;
+    --navy: #0E1226;
+    --navy-soft: #171C38;
+    --ink: #10142B;
+    --ink-muted: #6B7086;
+    --border: #E5E7F2;
+
+    --indigo: #4B5EFC;
+    --violet: #8B5CF6;
+    --amber: #E89B2E;
+    --teal: #12B8A6;
+    --rose: #F0508A;
+    --blue: #2F8FF0;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--surface);
+}
+
+.auth-wrap {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---------- Brand aside ---------- */
+
+.auth-aside {
+    flex: 1;
+    background: var(--navy);
+    color: #fff;
+    padding: 52px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-aside::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(circle at 30% 20%, black, transparent 70%);
+}
+
+.auth-aside > * { position: relative; z-index: 1; }
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 3px rgba(18, 184, 166, 0.22);
+    animation: pulse 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(18, 184, 166, 0.22); }
+    50% { box-shadow: 0 0 0 6px rgba(18, 184, 166, 0.10); }
+}
+
+.brand h2 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+.brand span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #8890B5;
+    margin-top: 1px;
+}
+
+.aside-copy .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7C84B8;
+    margin: 0 0 14px;
+}
+
+.aside-copy h1 {
+    font-family: var(--font-display);
+    font-size: 34px;
+    line-height: 1.22;
+    margin: 0 0 16px;
+    max-width: 420px;
+}
+
+.aside-copy p {
+    color: #A6ACD1;
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 380px;
+    margin: 0;
+}
+
+.modules-mini {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 22px;
+    max-width: 420px;
+}
+
+.modules-mini li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #C4C9E8;
+    font-weight: 500;
+}
+
+.modules-mini .swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.aside-foot {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #545B85;
+    letter-spacing: 0.04em;
+}
+
+/* ---------- Form panel ---------- */
+
+.auth-form-panel {
+    width: 460px;
+    flex-shrink: 0;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.auth-card { width: 100%; max-width: 340px; }
+
+.auth-card .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0 0 8px;
+}
+
+.auth-card h1 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    margin: 0 0 30px;
+    letter-spacing: -0.01em;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--ink);
+}
+
+.input-shell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0 14px;
+    background: var(--surface);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-shell:focus-within {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(75, 94, 252, 0.12);
+}
+
+.input-shell i {
+    color: var(--ink-muted);
+    font-size: 13px;
+    width: 14px;
+    text-align: center;
+}
+
+.input-shell input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 12px 0;
+    font-size: 14px;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: transparent;
+}
+
+.input-shell button {
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 13px;
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 22px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    color: var(--ink-muted);
+}
+
+.remember input { accent-color: var(--indigo); }
+
+.forgot {
+    font-size: 12.5px;
+    color: var(--indigo);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-primary {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 0;
+    background: var(--indigo);
+    color: #fff;
+    font-size: 14.5px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover { background: #3D4FE0; }
+.btn-primary:active { transform: translateY(1px); }
+
+.auth-card .foot-note {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    margin-top: 22px;
+}
+
+@media (max-width: 900px) {
+    .auth-aside { display: none; }
+    .auth-form-panel { width: 100%; }
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible {
+    outline: 2px solid var(--indigo);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .brand-dot { animation: none; }
+}

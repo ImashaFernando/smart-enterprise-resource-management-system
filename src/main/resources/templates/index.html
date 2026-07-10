@@ -1,25 +1,116 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>SERMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERMS · Smart Enterprise Resource Management System</title>
 
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>🏢 Smart Enterprise Resource Management System</h1>
+<nav class="nav">
+    <div class="brand">
+        <span class="brand-dot"></span>
+        <span>SERMS</span>
+    </div>
+    <div class="nav-links">
+        <a href="#modules">Modules</a>
+        <a href="#stats">Overview</a>
+        <a href="#">Docs</a>
+    </div>
+    <a th:href="@{/login}" href="login.html" class="btn-ghost">Login</a>
+</nav>
 
-<p>
-    A centralized platform to manage Employees, Departments,
-    Inventory, Sales, Finance, Projects and Reports.
-</p>
+<section class="hero">
+    <span class="eyebrow"><span class="dot"></span> Enterprise Resource Platform</span>
+    <h1>The <span class="accent">smart</span> console for running your entire enterprise</h1>
+    <p>A centralized platform to manage Employees, Departments, Inventory, Sales, Finance, Projects and Reports — all in one place.</p>
+    <div class="hero-ctas">
+        <a th:href="@{/login}" href="login.html" class="btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#modules" class="btn-outline">Explore modules</a>
+    </div>
+</section>
 
-<br>
+<section class="modules" id="modules">
 
-<a th:href="@{/login}">
-    <button>Get Started</button>
-</a>
+    <div class="module-card" style="--accent:#4B5EFC">
+        <div class="icon"><i class="fa-solid fa-users"></i></div>
+        <h3>Employees</h3>
+        <p>Profiles, roles, and attendance in one directory.</p>
+    </div>
+
+    <div class="module-card" style="--accent:#8B5CF6">
+        <div class="icon"><i class="fa-solid fa-building"></i></div>
+        <h3>Departments</h3>
+        <p>Org structure, teams, and reporting lines.</p>
+    </div>
+
+    <div class="module-card" style="--accent:#12B8A6">
+        <div class="icon"><i class="fa-solid fa-box"></i></div>
+        <h3>Inventory</h3>
+        <p>Stock levels, warehouses, and reorder alerts.</p>
+    </div>
+
+    <div class="module-card" style="--accent:#2F8FF0">
+        <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
+        <h3>Sales</h3>
+        <p>Orders, pipelines, and customer accounts.</p>
+    </div>
+
+    <div class="module-card" style="--accent:#F0508A">
+        <div class="icon"><i class="fa-solid fa-sack-dollar"></i></div>
+        <h3>Finance</h3>
+        <p>Revenue, expenses, and budget tracking.</p>
+    </div>
+
+    <div class="module-card" style="--accent:#E89B2E">
+        <div class="icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <h3>Projects</h3>
+        <p>Timelines, tasks, and delivery status.</p>
+    </div>
+
+    <div class="module-card" style="--accent:#4B5EFC">
+        <div class="icon"><i class="fa-solid fa-chart-column"></i></div>
+        <h3>Reports</h3>
+        <p>Cross-module analytics, exported on demand.</p>
+    </div>
+
+    <div class="module-card" style="--accent:#8B5CF6">
+        <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Access Control</h3>
+        <p>Role-based permissions across every module.</p>
+    </div>
+
+</section>
+
+<section class="stats" id="stats">
+    <div class="stat">
+        <div class="num">120+</div>
+        <div class="label">Employees managed</div>
+    </div>
+    <div class="stat">
+        <div class="num">8</div>
+        <div class="label">Departments</div>
+    </div>
+    <div class="stat">
+        <div class="num">540</div>
+        <div class="label">Inventory items</div>
+    </div>
+    <div class="stat">
+        <div class="num">2.5M</div>
+        <div class="label">LKR revenue tracked</div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <span>© 2026 SERMS — Smart Enterprise Resource Management System</span>
+    <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+    </div>
+</footer>
 
 </body>
 </html>

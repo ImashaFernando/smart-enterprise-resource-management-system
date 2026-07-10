@@ -1,107 +1,210 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>SERMS Dashboard</title>
 
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
-
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" href="dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-
 </head>
-
 <body>
 
 <div class="sidebar">
+    <div class="brand">
+        <span class="brand-dot"></span>
+        <div>
+            <h2>SERMS</h2>
+            <span>ENTERPRISE CONSOLE</span>
+        </div>
+    </div>
 
-    <h2>SERMS</h2>
+    <div class="nav-group-label">Operate</div>
+    <nav>
+        <a href="#" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
+        <a href="#"><i class="fa-solid fa-users"></i> Employees</a>
+        <a href="#"><i class="fa-solid fa-building"></i> Departments</a>
+        <a href="#"><i class="fa-solid fa-box"></i> Inventory</a>
+        <a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+        <a href="#"><i class="fa-solid fa-money-bill"></i> Finance</a>
+        <a href="#"><i class="fa-solid fa-chart-column"></i> Reports</a>
+    </nav>
 
-    <a href="#"><i class="fa-solid fa-house"></i> Dashboard</a>
-
-    <a href="#"><i class="fa-solid fa-users"></i> Employees</a>
-
-    <a href="#"><i class="fa-solid fa-building"></i> Departments</a>
-
-    <a href="#"><i class="fa-solid fa-box"></i> Inventory</a>
-
-    <a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a>
-
-    <a href="#"><i class="fa-solid fa-money-bill"></i> Finance</a>
-
-    <a href="#"><i class="fa-solid fa-chart-column"></i> Reports</a>
-
-    <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
-
-    <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-
+    <div class="bottom-nav">
+        <nav>
+            <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+    </div>
 </div>
 
 <div class="main">
 
     <div class="topbar">
-
-        <h1>Dashboard</h1>
-
-        <span>Administrator</span>
-
+        <div class="topbar-heading">
+            <p class="eyebrow">Overview · Live</p>
+            <h1>Dashboard</h1>
+        </div>
+        <div class="topbar-right">
+            <span class="clock" id="clock">--:--:--</span>
+            <div class="profile-chip">
+                <span class="avatar">A</span>
+                <span class="role">Administrator<small>Full access</small></span>
+            </div>
+        </div>
     </div>
 
     <div class="cards">
 
-        <div class="card">
+        <div class="card" style="--accent:#4B5EFC">
+            <div class="card-top">
+                <span class="card-icon"><i class="fa-solid fa-users"></i></span>
+                <span class="trend up"><i class="fa-solid fa-arrow-up"></i> 4.2%</span>
+            </div>
             <h3>Employees</h3>
             <p>120</p>
+            <div class="dot-row">
+                <span class="filled"></span><span class="filled"></span><span class="filled"></span>
+                <span class="filled"></span><span></span><span></span><span></span><span></span>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="--accent:#8B5CF6">
+            <div class="card-top">
+                <span class="card-icon"><i class="fa-solid fa-building"></i></span>
+                <span class="trend flat"><i class="fa-solid fa-minus"></i> 0.0%</span>
+            </div>
             <h3>Departments</h3>
             <p>8</p>
+            <div class="dot-row">
+                <span class="filled"></span><span class="filled"></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="--accent:#E89B2E">
+            <div class="card-top">
+                <span class="card-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                <span class="trend up"><i class="fa-solid fa-arrow-up"></i> 12%</span>
+            </div>
             <h3>Projects</h3>
             <p>15</p>
+            <div class="dot-row">
+                <span class="filled"></span><span class="filled"></span><span class="filled"></span>
+                <span class="filled"></span><span class="filled"></span><span></span><span></span><span></span>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="--accent:#12B8A6">
+            <div class="card-top">
+                <span class="card-icon"><i class="fa-solid fa-box"></i></span>
+                <span class="trend down"><i class="fa-solid fa-arrow-down"></i> 1.8%</span>
+            </div>
             <h3>Inventory</h3>
-            <p>540</p>
+            <p>540 <span class="unit">units</span></p>
+            <div class="dot-row">
+                <span class="filled"></span><span class="filled"></span><span class="filled"></span>
+                <span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span><span></span>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="--accent:#2F8FF0">
+            <div class="card-top">
+                <span class="card-icon"><i class="fa-solid fa-sack-dollar"></i></span>
+                <span class="trend up"><i class="fa-solid fa-arrow-up"></i> 8.6%</span>
+            </div>
             <h3>Revenue</h3>
-            <p>LKR 2.5M</p>
+            <p>2.5<span class="unit">M LKR</span></p>
+            <div class="dot-row">
+                <span class="filled"></span><span class="filled"></span><span class="filled"></span>
+                <span class="filled"></span><span class="filled"></span><span></span><span></span><span></span>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="--accent:#F0508A">
+            <div class="card-top">
+                <span class="card-icon"><i class="fa-solid fa-chart-column"></i></span>
+                <span class="trend flat"><i class="fa-solid fa-minus"></i> 0.0%</span>
+            </div>
             <h3>Reports</h3>
             <p>12</p>
+            <div class="dot-row">
+                <span class="filled"></span><span class="filled"></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
         </div>
 
     </div>
 
-    <div class="activity">
+    <div class="lower-grid">
 
-        <h2>Recent Activities</h2>
+        <div class="panel">
+            <div class="panel-head">
+                <h2>Recent Activity</h2>
+                <a href="#" class="view-all">View all →</a>
+            </div>
+            <ul class="log">
+                <li>
+                    <span class="status-dot" style="background:#4B5EFC"></span>
+                    <div>
+                        <div class="entry-text">Employee added — Nadeesha Perera, Finance</div>
+                        <div class="entry-meta">TODAY · 09:42</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="status-dot" style="background:#12B8A6"></span>
+                    <div>
+                        <div class="entry-text">Inventory updated — Warehouse B stock recount</div>
+                        <div class="entry-meta">TODAY · 08:15</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="status-dot" style="background:#E89B2E"></span>
+                    <div>
+                        <div class="entry-text">Project created — ERP Mobile Rollout</div>
+                        <div class="entry-meta">YESTERDAY · 17:03</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="status-dot" style="background:#2F8FF0"></span>
+                    <div>
+                        <div class="entry-text">Finance report generated — Q2 summary</div>
+                        <div class="entry-meta">YESTERDAY · 11:26</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-        <ul>
-
-            <li>✔ Employee Added</li>
-
-            <li>✔ Inventory Updated</li>
-
-            <li>✔ Project Created</li>
-
-            <li>✔ Finance Report Generated</li>
-
-        </ul>
+        <div class="panel">
+            <div class="panel-head">
+                <h2>Modules</h2>
+                <a href="#" class="view-all">Manage →</a>
+            </div>
+            <ul class="module-list">
+                <li><span class="swatch" style="background:#4B5EFC"></span><span class="m-name">Employees</span><span class="m-value">120 active</span></li>
+                <li><span class="swatch" style="background:#8B5CF6"></span><span class="m-name">Departments</span><span class="m-value">8 units</span></li>
+                <li><span class="swatch" style="background:#E89B2E"></span><span class="m-name">Projects</span><span class="m-value">15 running</span></li>
+                <li><span class="swatch" style="background:#12B8A6"></span><span class="m-name">Inventory</span><span class="m-value">540 items</span></li>
+                <li><span class="swatch" style="background:#2F8FF0"></span><span class="m-name">Finance</span><span class="m-value">LKR 2.5M</span></li>
+                <li><span class="swatch" style="background:#F0508A"></span><span class="m-name">Reports</span><span class="m-value">12 generated</span></li>
+            </ul>
+        </div>
 
     </div>
 
 </div>
+
+<script>
+    function tick() {
+        var el = document.getElementById('clock');
+        if (!el) return;
+        var now = new Date();
+        var pad = function(n) { return n.toString().padStart(2, '0'); };
+        el.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+</script>
 
 </body>
 </html>

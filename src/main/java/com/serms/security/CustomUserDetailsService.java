@@ -13,10 +13,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     public CustomUserDetailsService(UserRepository repository) {
         this.repository = repository;
     }
-
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
+
+        System.out.println("Login attempt: " + email);
 
         User user = repository.findByEmail(email)
                 .orElseThrow(() ->
@@ -24,4 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return new CustomUserDetails(user);
     }
+
+
 }
