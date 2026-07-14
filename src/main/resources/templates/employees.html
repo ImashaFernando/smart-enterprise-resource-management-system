@@ -1,10 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management | SERMS</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" href="dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-</body>
+<div class="sidebar">
+    <div class="brand">
+        <span class="brand-dot"></span>
+        <div>
+            <h2>SERMS</h2>
+            <span>ENTERPRISE CONSOLE</span>
+        </div>
+        <body>
+
+        <div class="sidebar">
+            <!-- Keep your existing sidebar exactly as it is -->
+        </div>
+
+        <div class="main">
+
+            <!-- Top Bar -->
+            <div class="topbar">
+                <div class="topbar-heading">
+                    <p class="eyebrow">Human Resource Module</p>
+                    <h1>Employee Management</h1>
+                </div>
+
+                <div class="topbar-right">
+                    <span class="clock" id="clock">--:--:--</span>
+
+                    <div class="profile-chip">
+                        <span class="avatar">A</span>
+
+                        <span class="role">
+                    Administrator
+                    <small>Full access</small>
+                </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Content -->
+
+            <div class="employee-container">
+
+                <div class="employee-header">
+
+                    <h2>Employees</h2>
+
+                    <div class="employee-actions">
+
+                        <input type="text"
+                               placeholder="Search Employee..."
+                               class="search-box">
+
+                        <a th:href="@{/employees/add}" class="add-btn">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Employee
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <table class="employee-table">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="employee : ${employees}">
+
+                        <td th:text="${employee.employeeCode}"></td>
+
+                        <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+
+                        <td th:text="${employee.email}"></td>
+
+                        <td th:text="${employee.department}"></td>
+
+                        <td th:text="${employee.designation}"></td>
+
+                        <td>
+                            <span th:text="${employee.status}"></span>
+                        </td>
+
+                        <td>
+
+                            <a th:href="@{/employees/edit/{id}(id=${employee.id})}">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+
+                            <a th:href="@{/employees/delete/{id}(id=${employee.id})}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <script>
+            function tick() {
+                var el = document.getElementById('clock');
+                if (!el) return;
+
+                var now = new Date();
+
+                var pad = function(n) {
+                    return n.toString().padStart(2,'0');
+                };
+
+                el.textContent =
+                    pad(now.getHours()) + ":" +
+                    pad(now.getMinutes()) + ":" +
+                    pad(now.getSeconds());
+            }
+
+            tick();
+            setInterval(tick,1000);
+        </script>
+
+        </body>
 </html>
