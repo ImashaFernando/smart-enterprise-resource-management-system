@@ -17,7 +17,8 @@ public class EmployeeController {
     @GetMapping("/employees")
     public String employees(Model model) {
 
-        model.addAttribute("employees", employeeService.getAllEmployees());
+        model.addAttribute("employees",
+                employeeService.getAllEmployees());
 
         return "employees";
     }

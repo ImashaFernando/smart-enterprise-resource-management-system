@@ -21,13 +21,42 @@
 
     <div class="nav-group-label">Operate</div>
     <nav>
-        <a href="#" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
-        <a href="#"><i class="fa-solid fa-users"></i> Employees</a>
-        <a href="#"><i class="fa-solid fa-building"></i> Departments</a>
-        <a href="#"><i class="fa-solid fa-box"></i> Inventory</a>
-        <a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a>
-        <a href="#"><i class="fa-solid fa-money-bill"></i> Finance</a>
-        <a href="#"><i class="fa-solid fa-chart-column"></i> Reports</a>
+
+        <a th:href="@{/dashboard}" class="active">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+
+        <a th:href="@{/employees}">
+            <i class="fa-solid fa-users"></i>
+            Employees
+        </a>
+
+        <a th:href="@{/departments}">
+            <i class="fa-solid fa-building"></i>
+            Departments
+        </a>
+
+        <a th:href="@{/inventory}">
+            <i class="fa-solid fa-box"></i>
+            Inventory
+        </a>
+
+        <a th:href="@{/projects}">
+            <i class="fa-solid fa-diagram-project"></i>
+            Projects
+        </a>
+
+        <a th:href="@{/finance}">
+            <i class="fa-solid fa-money-bill"></i>
+            Finance
+        </a>
+
+        <a th:href="@{/reports}">
+            <i class="fa-solid fa-chart-column"></i>
+            Reports
+        </a>
+
     </nav>
 
     <div class="bottom-nav">
