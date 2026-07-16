@@ -114,9 +114,17 @@
 
                     <div class="employee-actions">
 
-                        <input type="text"
-                               placeholder="Search Employee..."
-                               class="search-box">
+                        <form th:action="@{/employees}" method="get">
+
+                            <input
+                                    type="text"
+                                    name="keyword"
+                                    class="search-box"
+                                    placeholder="Search by Code, Name, Email..."
+                                    th:value="${keyword}">
+
+                        </form>
+
 
                         <a th:href="@{/employees/add}" class="add-btn">
                             <i class="fa-solid fa-plus"></i>
@@ -128,7 +136,6 @@
                 </div>
 
                 <table class="employee-table">
-
                     <thead>
 
                     <tr>
@@ -150,20 +157,33 @@
                     <tr th:each="employee : ${employees}">
 
                         <td th:text="${employee.employeeCode}"></td>
+
                         <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+
                         <td th:text="${employee.email}"></td>
+
                         <td th:text="${employee.department}"></td>
+
                         <td th:text="${employee.designation}"></td>
-                        <td th:text="${employee.status}"></td>
 
                         <td>
-                            <a th:href="@{/employees/edit/{id}(id=${employee.id})}">
+        <span th:text="${employee.status}"
+              th:class="${employee.status == 'ACTIVE'} ? 'status-active' : 'status-inactive'">
+        </span>
+                        </td>
+
+                        <td>
+
+                            <a th:href="@{/employees/edit/{id}(id=${employee.id})}"
+                               class="edit-btn">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
 
-                            <a th:href="@{/employees/delete/{id}(id=${employee.id})}">
+                            <a href="#"
+                               th:onclick="'deleteEmployee(' + ${employee.id} + '); return false;'">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
+
                         </td>
 
                     </tr>
@@ -175,7 +195,6 @@
             </div>
 
         </div>
-</div>
 </div>
 
 <script>
@@ -192,10 +211,7 @@
     tick();
     setInterval(tick, 1000);
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src="@{/js/employees.js}"></script>
 </body>
-</html>
-
-
-        </body>
 </html>

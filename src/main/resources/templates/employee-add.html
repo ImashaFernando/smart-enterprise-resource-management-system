@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>Add Employee</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/employees.css}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
 </head>
+
 <body>
+
+<div class="main">
+
+    <h1>Add Employee</h1>
+
+    <form th:action="@{/employees/save}" th:object="${employee}" method="post">
+
+        <input type="text" th:field="*{employeeCode}" placeholder="Employee Code" required>
+
+        <input type="text" th:field="*{firstName}" placeholder="First Name" required>
+
+        <input type="text" th:field="*{lastName}" placeholder="Last Name" required>
+
+        <input type="email" th:field="*{email}" placeholder="Email" required>
+
+        <input type="text" th:field="*{department}" placeholder="Department">
+
+        <input type="text" th:field="*{designation}" placeholder="Designation">
+
+        <select th:field="*{status}">
+            <option value="ACTIVE">ACTIVE</option>
+            <option value="INACTIVE">INACTIVE</option>
+        </select>
+
+        <button type="submit">
+            Save Employee
+        </button>
+
+    </form>
+
+</div>
 
 </body>
 </html>
