@@ -1,48 +1,227 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Add Employee</title>
+    <title>Add Employee | SERMS</title>
 
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
     <link rel="stylesheet" th:href="@{/css/employees.css}">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
 <div class="main">
 
-    <h1>Add Employee</h1>
+    <div class="page-header">
+        <h1>
+            <i class="fa-solid fa-user-plus"></i>
+            Add New Employee
+        </h1>
 
-    <form th:action="@{/employees/save}" th:object="${employee}" method="post">
+        <p>Register a new employee into the organization.</p>
+    </div>
 
-        <input type="text" th:field="*{employeeCode}" placeholder="Employee Code" required>
+    <div class="form-card">
 
-        <input type="text" th:field="*{firstName}" placeholder="First Name" required>
+        <form th:action="@{/employees/save}"
+              th:object="${employee}"
+              method="post">
 
-        <input type="text" th:field="*{lastName}" placeholder="Last Name" required>
+            <!-- ================= PERSONAL INFORMATION ================= -->
 
-        <input type="email" th:field="*{email}" placeholder="Email" required>
+            <div class="section-title">
+                <i class="fa-solid fa-user"></i>
+                Personal Information
+            </div>
 
-        <input type="text" th:field="*{department}" placeholder="Department">
+            <div class="form-grid">
 
-        <input type="text" th:field="*{designation}" placeholder="Designation">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-id-badge"></i> Employee Code</label>
+                    <input type="text"
+                           th:field="*{employeeCode}"
+                           placeholder="EMP001"
+                           required>
+                </div>
 
-        <select th:field="*{status}">
-            <option value="ACTIVE">ACTIVE</option>
-            <option value="INACTIVE">INACTIVE</option>
-        </select>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> First Name</label>
+                    <input type="text"
+                           th:field="*{firstName}"
+                           placeholder="First Name"
+                           required>
+                </div>
 
-        <button type="submit">
-            Save Employee
-        </button>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Last Name</label>
+                    <input type="text"
+                           th:field="*{lastName}"
+                           placeholder="Last Name"
+                           required>
+                </div>
 
-    </form>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-envelope"></i> Email</label>
+                    <input type="email"
+                           th:field="*{email}"
+                           placeholder="example@company.com"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                    <input type="text"
+                           th:field="*{phone}"
+                           placeholder="07XXXXXXXX">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-address-card"></i> NIC</label>
+                    <input type="text"
+                           th:field="*{nic}"
+                           placeholder="NIC Number">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-venus-mars"></i> Gender</label>
+
+                    <select th:field="*{gender}">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-calendar"></i> Date of Birth</label>
+
+                    <input type="date"
+                           th:field="*{dateOfBirth}">
+                </div>
+
+            </div>
+
+            <!-- ================= EMPLOYMENT ================= -->
+
+            <div class="section-title">
+                <i class="fa-solid fa-briefcase"></i>
+                Employment Information
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        <i class="fa-solid fa-building"></i>
+                        Department
+                    </label>
+
+                    <select th:field="*{department}" required>
+
+                        <option value="">Select Department</option>
+
+                        <option
+                                th:each="dept : ${departments}"
+                                th:value="${dept.id}"
+                                th:text="${dept.departmentName}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        <i class="fa-solid fa-user-tie"></i>
+                        Designation
+                    </label>
+
+                    <input type="text"
+                           th:field="*{designation}"
+                           placeholder="Designation">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                        Salary
+                    </label>
+
+                    <input type="number"
+                           step="0.01"
+                           th:field="*{salary}"
+                           placeholder="Salary">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Status
+                    </label>
+
+                    <select th:field="*{status}">
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="INACTIVE">INACTIVE</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- ================= ADDRESS ================= -->
+
+            <div class="section-title">
+                <i class="fa-solid fa-location-dot"></i>
+                Address
+            </div>
+
+            <div class="form-group full-width">
+
+                <textarea
+                        th:field="*{address}"
+                        rows="4"
+                        placeholder="Enter Employee Address">
+                </textarea>
+
+            </div>
+
+            <!-- ================= BUTTONS ================= -->
+
+            <div class="button-group">
+
+                <a th:href="@{/employees}"
+                   class="cancel-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Cancel
+
+                </a>
+
+                <button
+                        type="submit"
+                        class="add-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Employee
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 

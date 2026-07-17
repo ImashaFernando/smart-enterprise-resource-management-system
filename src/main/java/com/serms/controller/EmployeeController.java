@@ -1,57 +1,77 @@
 package com.serms.controller;
 
 import com.serms.entity.Employee;
+import com.serms.service.DepartmentService;
 import com.serms.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/employees")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final DepartmentService departmentService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService,
+                              DepartmentService departmentService) {
         this.employeeService = employeeService;
+        this.departmentService = departmentService;
     }
 
-    @GetMapping("/employees")
-    public String employees(Model model) {
+    // ===========================
+    // Employee List
+    // ===========================
+    @GetMapping
+    public String listEmployees(Model model) {
 
-        var employees = employeeService.getAllEmployees();
-
-        System.out.println("Employee Count = " + employees.size());
-
-        model.addAttribute("employees", employees);
+        model.addAttribute("employees", employeeService.getAllEmployees());
 
         return "employees";
     }
 
-    @GetMapping("/employees/add")
-    public String addEmployee(Model model) {
+    // ===========================
+    // Add Employee Page
+    // ===========================
+    @GetMapping("/add")
+    public String showAddEmployeeForm(Model model) {
+
         model.addAttribute("employee", new Employee());
+        model.addAttribute("departments", departmentService.getAllDepartments());
+
         return "employee-add";
     }
 
-    @PostMapping("/employees/save")
+    // ===========================
+    // Save Employee
+    // ===========================
+    @PostMapping("/save")
     public String saveEmployee(@ModelAttribute Employee employee) {
+
         employeeService.saveEmployee(employee);
+
         return "redirect:/employees";
     }
 
-    // ===== EDIT =====
-    @GetMapping("/employees/edit/{id}")
+    // ===========================
+    // Edit Employee Page
+    // ===========================
+    @GetMapping("/edit/{id}")
     public String editEmployee(@PathVariable Long id, Model model) {
 
         Employee employee = employeeService.getEmployeeById(id);
 
         model.addAttribute("employee", employee);
+        model.addAttribute("departments", departmentService.getAllDepartments());
 
         return "employee-edit";
     }
 
-    // ===== UPDATE =====
-    @PostMapping("/employees/update/{id}")
+    // ===========================
+    // Update Employee
+    // ===========================
+    @PostMapping("/update/{id}")
     public String updateEmployee(@PathVariable Long id,
                                  @ModelAttribute Employee employee) {
 
@@ -61,12 +81,15 @@ public class EmployeeController {
 
         return "redirect:/employees";
     }
-    @GetMapping("/employees/delete/{id}")
+
+    // ===========================
+    // Delete Employee
+    // ===========================
+    @GetMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable Long id) {
 
         employeeService.deleteEmployee(id);
 
         return "redirect:/employees";
     }
-
 }

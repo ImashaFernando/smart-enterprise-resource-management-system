@@ -2,6 +2,8 @@ package com.serms.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "departments")
@@ -32,8 +34,14 @@ public class Department {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    // One Department -> Many Employees
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Employee> employees = new ArrayList<>();
+
     public Department() {
     }
+
+    // ==================== Getters & Setters ====================
 
     public Long getId() {
         return id;
@@ -97,5 +105,13 @@ public class Department {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

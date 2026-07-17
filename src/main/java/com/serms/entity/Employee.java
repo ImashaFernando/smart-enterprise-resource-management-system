@@ -1,7 +1,6 @@
 package com.serms.entity;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,7 +35,10 @@ public class Employee {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    private String department;
+    // Relationship with Department
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     private String designation;
 
@@ -52,8 +54,14 @@ public class Employee {
     public Employee() {
     }
 
+    // -------------------- Getters & Setters --------------------
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmployeeCode() {
@@ -62,10 +70,6 @@ public class Employee {
 
     public void setEmployeeCode(String employeeCode) {
         this.employeeCode = employeeCode;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -124,11 +128,11 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 

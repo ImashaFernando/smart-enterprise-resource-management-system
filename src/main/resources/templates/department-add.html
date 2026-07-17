@@ -4,13 +4,14 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Add Department | SERMS</title>
 
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
     <link rel="stylesheet" th:href="@{/css/departments.css}">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -20,90 +21,82 @@
 
     <div class="form-card">
 
-        <h1>Add Department</h1>
+        <h1>
+            <i class="fa-solid fa-building"></i>
+            Add Department
+        </h1>
 
         <form th:action="@{/departments/save}"
               th:object="${department}"
               method="post">
 
+            <!-- Department Code -->
             <div class="form-group">
-
                 <label>Department Code</label>
-
-                <input
-                        type="text"
-                        th:field="*{departmentCode}"
-                        placeholder="Enter Department Code"
-                        required>
-
+                <input type="text"
+                       th:field="*{departmentCode}"
+                       placeholder="Enter Department Code"
+                       required>
             </div>
 
+            <!-- Department Name -->
             <div class="form-group">
-
                 <label>Department Name</label>
-
-                <input
-                        type="text"
-                        th:field="*{departmentName}"
-                        placeholder="Enter Department Name"
-                        required>
-
+                <input type="text"
+                       th:field="*{departmentName}"
+                       placeholder="Enter Department Name"
+                       required>
             </div>
 
+            <!-- Manager Name -->
             <div class="form-group">
-
                 <label>Manager Name</label>
-
-                <input
-                        type="text"
-                        th:field="*{managerName}"
-                        placeholder="Enter Manager Name"
-                        required>
-
+                <input type="text"
+                       th:field="*{managerName}"
+                       placeholder="Enter Manager Name"
+                       required>
             </div>
 
+            <!-- Employee Count -->
             <div class="form-group">
-
                 <label>Total Employees</label>
-
-                <input
-                        type="number"
-                        th:field="*{employeeCount}"
-                        placeholder="Enter Total Employees"
-                        required>
-
+                <input type="number"
+                       th:field="*{employeeCount}"
+                       placeholder="Enter Employee Count"
+                       min="0"
+                       required>
             </div>
 
+            <!-- Location -->
             <div class="form-group">
+                <label>Location</label>
+                <input type="text"
+                       th:field="*{location}"
+                       placeholder="Enter Department Location"
+                       required>
+            </div>
 
+            <!-- Status -->
+            <div class="form-group">
                 <label>Status</label>
 
                 <select th:field="*{status}">
-
                     <option value="ACTIVE">ACTIVE</option>
-
                     <option value="INACTIVE">INACTIVE</option>
-
                 </select>
-
             </div>
 
+            <!-- Buttons -->
             <div class="button-group">
 
                 <button type="submit" class="add-btn">
-
                     <i class="fa-solid fa-floppy-disk"></i>
-
                     Save Department
-
                 </button>
 
                 <a th:href="@{/departments}" class="cancel-btn">
-
                     <i class="fa-solid fa-arrow-left"></i>
-
                     Back
-
                 </a>
 
             </div>
