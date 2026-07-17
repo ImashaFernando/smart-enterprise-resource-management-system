@@ -20,11 +20,13 @@ function deleteEmployee(id) {
 
         searchBox.addEventListener("keyup", function () {
 
-            if (this.value.length >= 2 || this.value.length === 0) {
+            clearTimeout(window.searchTimer);
+
+            window.searchTimer = setTimeout(() => {
 
                 this.form.submit();
 
-            }
+            }, 500);
 
         });
 

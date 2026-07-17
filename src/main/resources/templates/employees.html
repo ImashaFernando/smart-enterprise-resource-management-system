@@ -114,18 +114,25 @@
 
                     <div class="employee-actions">
 
-                        <form th:action="@{/employees}" method="get">
+                        <!-- Search Form -->
+                        <form th:action="@{/employees}" method="get" class="search-form">
 
-                            <input
-                                    type="text"
-                                    name="keyword"
-                                    class="search-box"
-                                    placeholder="Search by Code, Name, Email..."
-                                    th:value="${keyword}">
+                            <div class="search-wrapper">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                                <input
+                                        type="text"
+                                        name="keyword"
+                                        class="search-box"
+                                        placeholder="Search by Code, Name, Email or Department..."
+                                        th:value="${keyword}">
+
+                            </div>
 
                         </form>
 
-
+                        <!-- Add Employee Button -->
                         <a th:href="@{/employees/add}" class="add-btn">
                             <i class="fa-solid fa-plus"></i>
                             Add Employee
@@ -133,6 +140,7 @@
 
                     </div>
 
+                </div>
                 </div>
 
                 <table class="employee-table">
@@ -164,18 +172,18 @@
 
                         <td th:text="${employee.department}"></td>
 
-                        <td th:text="${employee.designation}"></td>
+                        <td th:text="${#strings.capitalize(employee.designation)}"></td>
 
                         <td>
-        <span th:text="${employee.status}"
-              th:class="${employee.status == 'ACTIVE'} ? 'status-active' : 'status-inactive'">
-        </span>
+                            <span th:class="'status ' + ${employee.status.toLowerCase()}"
+                                  th:text="${employee.status}">
+
+                            </span>
                         </td>
 
                         <td>
 
-                            <a th:href="@{/employees/edit/{id}(id=${employee.id})}"
-                               class="edit-btn">
+                            <a th:href="@{/employees/edit/{id}(id=${employee.id})}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
 

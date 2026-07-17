@@ -1,0 +1,309 @@
+.form-card{
+    max-width:700px;
+    margin:40px auto;
+    background:#fff;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.form-card h1{
+    margin-bottom:25px;
+    color:#1b2559;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.form-group input,
+.form-group select{
+    padding:12px 15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    outline:none;
+    border-color:#4B5EFC;
+}
+
+.button-group{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.cancel-btn{
+    background:#6c757d;
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.cancel-btn:hover{
+    background:#5a6268;
+}
+.department-card{
+
+    background:#fff;
+
+    margin-top:30px;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+.department-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.department-header h2{
+
+    font-size:30px;
+
+    color:#1f2937;
+
+}
+
+.department-header p{
+
+    color:#6b7280;
+
+    margin-top:5px;
+
+}
+.add-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:linear-gradient(135deg,#4F46E5,#6366F1);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 24px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.add-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(79,70,229,.3);
+
+}
+.search-wrapper{
+
+    margin-bottom:25px;
+
+}
+
+.search-box{
+
+    width:340px;
+
+    display:flex;
+
+    align-items:center;
+
+    background:#f4f6fb;
+
+    padding:12px 16px;
+
+    border-radius:12px;
+
+}
+
+.search-box i{
+
+    color:#9ca3af;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    border:none;
+
+    background:none;
+
+    outline:none;
+
+    padding-left:12px;
+
+    font-size:15px;
+
+}
+.department-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.department-table thead{
+
+    background:#eef2ff;
+
+}
+
+.department-table th{
+
+    padding:18px;
+
+    text-align:left;
+
+    color:#374151;
+
+    font-size:15px;
+
+}
+
+.department-table td{
+
+    padding:18px;
+
+    border-bottom:1px solid #eee;
+
+}
+.department-table tbody tr{
+
+    transition:.3s;
+
+}
+
+.department-table tbody tr:hover{
+
+    background:#f9fbff;
+
+}
+.status{
+
+    padding:7px 16px;
+
+    border-radius:50px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.status.active{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.status.inactive{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+.action-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.edit-btn{
+
+    width:38px;
+
+    height:38px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:10px;
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.edit-btn:hover{
+
+    background:#4f46e5;
+
+    color:white;
+
+}
+
+.delete-btn{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+    color:white;
+
+}

@@ -16,27 +16,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public String employees(
+    public String employees(Model model) {
 
-            @RequestParam(required = false) String keyword,
+        var employees = employeeService.getAllEmployees();
 
-            Model model) {
+        System.out.println("Employee Count = " + employees.size());
 
-        if (keyword != null && !keyword.trim().isEmpty()) {
-
-            model.addAttribute(
-                    "employees",
-                    employeeService.searchEmployees(keyword));
-
-        } else {
-
-            model.addAttribute(
-                    "employees",
-                    employeeService.getAllEmployees());
-
-        }
-
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("employees", employees);
 
         return "employees";
     }

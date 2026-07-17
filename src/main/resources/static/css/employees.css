@@ -58,10 +58,17 @@
     padding:15px;
     text-align:left;
 }
-
+.employee-table tbody tr{
+    transition:.25s;
+}
 .employee-table td{
     padding:15px;
     border-bottom:1px solid #eee;
+    vertical-align: middle;
+}
+.employee-table td:first-child{
+    font-weight:600;
+    color:#3B3F5C;
 }
 
 .employee-table tr:hover{
@@ -75,17 +82,19 @@
 }
 
 .delete-btn{
-    color:#F0508A;
+    color:#E53935;
     font-size:18px;
     text-decoration:none;
 }
 
 .edit-btn:hover{
     color:#3647e5;
+    background:#EEF1FF;
 }
 
 .delete-btn:hover{
     color:#d62f6b;
+    background:#FFECEC;
 }
 
 .status-active{
@@ -142,4 +151,73 @@ form button:hover{
 
     background:#3748E6;
 
+}
+.search-form{
+    margin:0;
+}
+
+.search-wrapper{
+    position:relative;
+}
+
+.search-wrapper i{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#888;
+    font-size:14px;
+}
+
+.search-box{
+
+    width:320px;
+
+    padding:12px 15px 12px 42px;
+
+    border:1px solid #dcdfe6;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:14px;
+
+    transition:.3s;
+
+}
+
+.search-box:focus{
+
+    border-color:#4B5EFC;
+
+    box-shadow:0 0 0 4px rgba(75,94,252,.15);
+
+}
+.status{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.status.active{
+    background:#E8FFF1;
+    color:#16A34A;
+}
+
+.status.inactive{
+    background:#FFE9E9;
+    color:#DC2626;
+}
+.action-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    transition:.25s;
+    text-decoration:none;
 }

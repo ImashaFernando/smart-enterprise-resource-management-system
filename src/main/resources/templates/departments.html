@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Department Management | SERMS</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/departments.css}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="brand">
+
+        <span class="brand-dot"></span>
+
+        <div>
+
+            <h2>SERMS</h2>
+
+            <span>ENTERPRISE CONSOLE</span>
+
+        </div>
+
+    </div>
+
+    <div class="nav-group-label">OPERATE</div>
+
+    <nav>
+
+        <a th:href="@{/dashboard}">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+
+        <a th:href="@{/employees}">
+            <i class="fa-solid fa-users"></i>
+            Employees
+        </a>
+
+        <a th:href="@{/departments}" class="active">
+            <i class="fa-solid fa-building"></i>
+            Departments
+        </a>
+
+        <a th:href="@{/inventory}">
+            <i class="fa-solid fa-box"></i>
+            Inventory
+        </a>
+
+        <a th:href="@{/projects}">
+            <i class="fa-solid fa-diagram-project"></i>
+            Projects
+        </a>
+
+        <a th:href="@{/finance}">
+            <i class="fa-solid fa-money-bill"></i>
+            Finance
+        </a>
+
+        <a th:href="@{/reports}">
+            <i class="fa-solid fa-chart-column"></i>
+            Reports
+        </a>
+
+    </nav>
+
+    <div class="bottom-nav">
+
+        <nav>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</div>
+
+<div class="main">
+
+    <!-- Top Bar -->
+
+    <div class="topbar">
+
+        <div class="topbar-heading">
+
+            <p class="eyebrow">HUMAN RESOURCE MODULE</p>
+
+            <h1>Department Management</h1>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <span class="clock" id="clock">--:--:--</span>
+
+            <div class="profile-chip">
+
+                <span class="avatar">A</span>
+
+                <span class="role">
+                    Administrator
+                    <small>Full access</small>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Department Content -->
+
+    <div class="department-card">
+        <div class="department-header">
+
+            <div>
+
+                <h2>Departments</h2>
+
+                <p>Manage all departments in your organization.</p>
+
+            </div>
+
+            <a th:href="@{/departments/add}" class="add-btn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Department
+
+            </a>
+
+        </div>
+        <div class="search-wrapper">
+
+            <form th:action="@{/departments}" method="get">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                            type="text"
+                            name="keyword"
+                            placeholder="Search department..."
+                            th:value="${keyword}">
+
+                </div>
+
+            </form>
+
+        </div>
+
+        </div>
+
+        <table class="department-table">
+
+            <thead>
+
+            <tr>
+
+                <th>Code</th>
+
+                <th>Department</th>
+
+                <th>Manager</th>
+
+                <th>Total Employees</th>
+
+                <th>Status</th>
+
+                <th>Action</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="department : ${departments}">
+
+                <td th:text="${department.departmentCode}"></td>
+
+                <td th:text="${department.departmentName}"></td>
+
+                <td th:text="${department.managerName}"></td>
+
+                <td th:text="${department.employeeCount}"></td>
+
+                <td>
+        <span th:class="'status ' + ${#strings.toLowerCase(department.status)}"
+              th:text="${department.status}">
+        </span>
+                </td>
+
+                <td class="action-buttons">
+
+                    <a th:href="@{/departments/edit/{id}(id=${department.id})}"
+                       class="edit-btn"
+                       title="Edit Department">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </a>
+
+                    <button type="button"
+                            class="delete-btn"
+                            th:onclick="'deleteDepartment(' + ${department.id} + ')'">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+    function tick() {
+
+        const el = document.getElementById("clock");
+
+        const now = new Date();
+
+        el.textContent = now.toLocaleTimeString();
+
+    }
+
+    tick();
+
+    setInterval(tick,1000);
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:src="@{/js/departments.js}"></script>
+
+</body>
+
+</html>
