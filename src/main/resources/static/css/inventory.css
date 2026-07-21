@@ -1,0 +1,280 @@
+/* ===========================
+   Inventory Module
+=========================== */
+
+.main {
+    padding: 30px;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+/* Page Header */
+
+.page-header{
+    margin-bottom:25px;
+}
+
+.page-header h1{
+    font-size:30px;
+    color:#1f2937;
+    margin-bottom:8px;
+}
+
+.page-header p{
+    color:#6b7280;
+}
+
+/* Card */
+
+.form-card,
+.inventory-container{
+    background:#fff;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* Section */
+
+.section-title{
+    font-size:18px;
+    font-weight:600;
+    margin:30px 0 20px;
+    color:#1e3a8a;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.section-title:first-child{
+    margin-top:0;
+}
+
+/* Form */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:8px;
+    font-weight:600;
+    color:#374151;
+}
+
+.form-group input,
+.form-group select{
+    padding:12px 15px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:15px;
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+/* Buttons */
+
+.button-group{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    margin-top:35px;
+}
+
+.add-btn,
+.cancel-btn{
+    padding:12px 22px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:.3s;
+}
+
+.add-btn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
+
+.add-btn:hover{
+    background:#1d4ed8;
+}
+
+.cancel-btn{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.cancel-btn:hover{
+    background:#d1d5db;
+}
+
+/* Inventory List */
+
+.inventory-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.inventory-actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+/* Search */
+
+.search-wrapper{
+    position:relative;
+}
+
+.search-wrapper i{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#6b7280;
+}
+
+.search-box{
+    width:320px;
+    padding:12px 15px 12px 45px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+}
+
+.search-box:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+/* Table */
+
+.inventory-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.inventory-table thead{
+    background:#2563eb;
+    color:white;
+}
+
+.inventory-table th,
+.inventory-table td{
+    padding:15px;
+    text-align:left;
+}
+
+.inventory-table tbody tr{
+    border-bottom:1px solid #eee;
+    transition:.3s;
+}
+
+.inventory-table tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* Status */
+
+.status{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.status.in\ stock{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status.low\ stock{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.status.out\ of\ stock{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+/* Actions */
+
+.action-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.edit-btn,
+.delete-btn{
+    width:38px;
+    height:38px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:8px;
+    color:#fff;
+    text-decoration:none;
+}
+
+.edit-btn{
+    background:#0ea5e9;
+}
+
+.edit-btn:hover{
+    background:#0284c7;
+}
+
+.delete-btn{
+    background:#ef4444;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .inventory-header{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .inventory-actions{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-box{
+        width:100%;
+    }
+
+    .button-group{
+        flex-direction:column;
+    }
+
+}

@@ -1,10 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inventory Management | SERMS</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/inventory.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
+
+<!-- ================= Sidebar ================= -->
+
+<div class="sidebar">
+
+    <div class="brand">
+
+        <span class="brand-dot"></span>
+
+        <div>
+            <h2>SERMS</h2>
+            <span>ENTERPRISE CONSOLE</span>
+        </div>
+
+    </div>
+
+    <div class="nav-group-label">Operate</div>
+
+    <nav>
+
+        <a th:href="@{/dashboard}">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+
+        <a th:href="@{/employees}">
+            <i class="fa-solid fa-users"></i>
+            Employees
+        </a>
+
+        <a th:href="@{/departments}">
+            <i class="fa-solid fa-building"></i>
+            Departments
+        </a>
+
+        <a th:href="@{/inventory}" class="active">
+            <i class="fa-solid fa-box"></i>
+            Inventory
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-diagram-project"></i>
+            Projects
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-money-bill"></i>
+            Finance
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-chart-column"></i>
+            Reports
+        </a>
+
+    </nav>
+
+    <div class="bottom-nav">
+
+        <nav>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a th:href="@{/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</div>
+
+<!-- ================= Main ================= -->
+
+<div class="main">
+
+    <!-- Top Bar -->
+
+    <div class="topbar">
+
+        <div class="topbar-heading">
+
+            <p class="eyebrow">Inventory Module</p>
+
+            <h1>Inventory Management</h1>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <span class="clock" id="clock"></span>
+
+            <div class="profile-chip">
+
+                <span class="avatar">A</span>
+
+                <span class="role">
+                    Administrator
+                    <small>Full access</small>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Inventory -->
+
+    <div class="inventory-container">
+
+        <div class="inventory-header">
+
+            <h2>Products</h2>
+
+            <div class="inventory-actions">
+
+                <!-- Search -->
+
+                <form th:action="@{/inventory}"
+                      method="get"
+                      class="search-form">
+
+                    <div class="search-wrapper">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                                type="text"
+                                name="keyword"
+                                class="search-box"
+                                placeholder="Search by Code, Product, Category or Supplier..."
+                                th:value="${keyword}">
+
+                    </div>
+
+                </form>
+
+                <!-- Add Button -->
+
+                <a th:href="@{/inventory/add}"
+                   class="add-btn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Product
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Table -->
+
+        <table class="inventory-table">
+
+            <thead>
+
+            <tr>
+
+                <th>Code</th>
+
+                <th>Product</th>
+
+                <th>Category</th>
+
+                <th>Quantity</th>
+
+                <th>Unit Price</th>
+
+                <th>Supplier</th>
+
+                <th>Status</th>
+
+                <th>Action</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="item : ${inventoryList}">
+
+                <td th:text="${item.productCode}"></td>
+
+                <td th:text="${item.productName}"></td>
+
+                <td th:text="${item.category}"></td>
+
+                <td th:text="${item.quantity}"></td>
+
+                <td th:text="'LKR ' + ${item.unitPrice}"></td>
+
+                <td th:text="${item.supplier}"></td>
+
+                <td>
+
+                    <span
+                            th:class="'status ' + ${item.status.toLowerCase()}"
+                            th:text="${item.status}">
+
+                    </span>
+
+                </td>
+
+                <td class="action-buttons">
+
+                    <a
+                            th:href="@{/inventory/edit/{id}(id=${item.id})}"
+                            class="edit-btn">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </a>
+
+                    <a
+                            href="#"
+                            th:onclick="'deleteInventory(' + ${item.id} + '); return false;'"
+                            class="delete-btn">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+    function tick(){
+
+        const clock=document.getElementById("clock");
+
+        const now=new Date();
+
+        clock.textContent=
+            now.toLocaleTimeString('en-GB',{hour12:false});
+
+    }
+
+    tick();
+
+    setInterval(tick,1000);
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:src="@{/js/inventory.js}"></script>
 
 </body>
 </html>
