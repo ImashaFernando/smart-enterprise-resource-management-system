@@ -1,0 +1,75 @@
+package com.serms.controller;
+
+import com.serms.entity.Project;
+import com.serms.service.ProjectService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/projects")
+public class ProjectController {
+
+private final ProjectService projectService;
+
+public ProjectController(ProjectService projectService) {
+this.projectService = projectService;
+}
+
+@GetMapping
+public String listProjects(
+@RequestParam(value = "keyword", required = false) String keyword,
+Model model) {
+
+model.addAttribute("projectList",
+projectService.searchProjects(keyword));
+
+model.addAttribute("keyword", keyword);
+
+return "project";
+}
+
+@GetMapping("/add")
+public String showAddForm(Model model) {
+
+model.addAttribute("project", new Project());
+
+return "project-add";
+}
+
+@PostMapping("/save")
+public String saveProject(@ModelAttribute Project project) {
+
+projectService.saveProject(project);
+
+return "redirect:/projects";
+}
+
+@GetMapping("/edit/{id}")
+public String editProject(@PathVariable Long id, Model model) {
+
+model.addAttribute("project",
+projectService.getProjectById(id));
+
+return "project-edit";
+}
+
+@PostMapping("/update/{id}")
+public String updateProject(@PathVariable Long id,
+@ModelAttribute Project project) {
+
+project.setId(id);
+
+projectService.updateProject(project);
+
+return "redirect:/projects";
+}
+
+@GetMapping("/delete/{id}")
+public String deleteProject(@PathVariable Long id) {
+
+projectService.deleteProject(id);
+
+return "redirect:/projects";
+}
+}
