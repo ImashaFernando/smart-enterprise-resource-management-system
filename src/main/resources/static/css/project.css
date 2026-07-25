@@ -174,14 +174,43 @@
 
 .status{
     display:inline-block;
-    padding:6px 12px;
+    padding:8px 16px;
     background:#dbeafe;
     color:#1d4ed8;
     border-radius:20px;
     font-size:13px;
     font-weight:600;
+    text-align:center;
+    min-width:100px;
+}
+/* Completed */
+.status.completed{
+    background:#dcfce7;
+    color:#15803d;
+}
+/* In Progress */
+.status.in-progress{
+    background:#dbeafe;
+    color:#2563eb;
 }
 
+/* Planning */
+.status.planning{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+/* On Hold */
+.status.on-hold{
+    background:#ffedd5;
+    color:#ea580c;
+}
+
+/* Cancelled */
+.status.cancelled{
+    background:#fee2e2;
+    color:#dc2626;
+}
 .action-buttons{
     display:flex;
     gap:10px;

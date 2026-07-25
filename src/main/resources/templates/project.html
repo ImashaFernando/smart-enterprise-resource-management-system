@@ -203,9 +203,32 @@
                 <td th:text="${project.priority}"></td>
 
                 <td>
-                    <span class="status"
-                          th:text="${project.status}">
-                    </span>
+
+    <span class="status completed"
+          th:if="${project.status == 'Completed'}">
+        Completed
+    </span>
+
+                    <span class="status in-progress"
+                          th:if="${project.status == 'In Progress'}">
+        In Progress
+    </span>
+
+                    <span class="status planning"
+                          th:if="${project.status == 'Planning'}">
+        Planning
+    </span>
+
+                    <span class="status on-hold"
+                          th:if="${project.status == 'On Hold'}">
+        On Hold
+    </span>
+
+                    <span class="status cancelled"
+                          th:if="${project.status == 'Cancelled'}">
+        Cancelled
+    </span>
+
                 </td>
 
                 <td class="action-buttons">
