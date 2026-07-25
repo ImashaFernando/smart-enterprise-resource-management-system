@@ -1,4 +1,19 @@
 package com.serms.repository;
 
-public interface FinanceRepository {
+import com.serms.entity.Finance;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface FinanceRepository extends JpaRepository<Finance, Long> {
+
+    List<Finance> findByTransactionCodeContainingIgnoreCaseOrTransactionTypeContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrPaymentMethodContainingIgnoreCase(
+            String transactionCode,
+            String transactionType,
+            String category,
+            String paymentMethod
+    );
+
 }

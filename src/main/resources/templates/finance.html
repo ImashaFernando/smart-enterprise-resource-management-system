@@ -1,10 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Finance Management | SERMS</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/finance.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
+
+<div class="sidebar">
+
+    <div class="brand">
+
+        <span class="brand-dot"></span>
+
+        <div>
+
+            <h2>SERMS</h2>
+
+            <span>ENTERPRISE CONSOLE</span>
+
+        </div>
+
+    </div>
+
+    <div class="nav-group-label">OPERATE</div>
+
+    <nav>
+
+        <a th:href="@{/dashboard}">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+
+        <a th:href="@{/employees}">
+            <i class="fa-solid fa-users"></i>
+            Employees
+        </a>
+
+        <a th:href="@{/departments}">
+            <i class="fa-solid fa-building"></i>
+            Departments
+        </a>
+
+        <a th:href="@{/inventory}">
+            <i class="fa-solid fa-box"></i>
+            Inventory
+        </a>
+
+        <a th:href="@{/projects}">
+            <i class="fa-solid fa-diagram-project"></i>
+            Projects
+        </a>
+
+        <a th:href="@{/finance}" class="active">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            Finance
+        </a>
+
+        <a th:href="@{/reports}">
+            <i class="fa-solid fa-chart-column"></i>
+            Reports
+        </a>
+
+    </nav>
+
+    <div class="bottom-nav">
+
+        <nav>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a th:href="@{/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+
+            <p class="eyebrow">FINANCE MODULE</p>
+
+            <h1>Finance Management</h1>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <span id="clock"></span>
+
+            <div class="profile-chip">
+
+                <span class="avatar">A</span>
+
+                <div>
+
+                    <strong>Administrator</strong>
+
+                    <small>Full access</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="finance-container">
+
+        <div class="finance-header">
+
+            <h2>Transactions</h2>
+
+            <div class="finance-actions">
+
+                <form th:action="@{/finance}" method="get">
+
+                    <div class="search-wrapper">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                                type="text"
+                                name="keyword"
+                                class="search-box"
+                                th:value="${keyword}"
+                                placeholder="Search Transaction">
+
+                    </div>
+
+                </form>
+
+                <a th:href="@{/finance/add}" class="add-btn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Transaction
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <table class="finance-table">
+
+            <thead>
+
+            <tr>
+
+                <th>Code</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="finance : ${financeList}">
+
+                <td th:text="${finance.transactionCode}"></td>
+
+                <td th:text="${finance.transactionType}"></td>
+
+                <td th:text="${finance.category}"></td>
+
+                <td th:text="'LKR ' + ${finance.amount}"></td>
+
+                <td th:text="${finance.transactionDate}"></td>
+
+                <td th:text="${finance.paymentMethod}"></td>
+
+                <td>
+
+                    <span class="status completed"
+                          th:if="${finance.status=='Completed'}">
+
+                        Completed
+
+                    </span>
+
+                    <span class="status paid"
+                          th:if="${finance.status=='Paid'}">
+
+                        Paid
+
+                    </span>
+
+                    <span class="status pending"
+                          th:if="${finance.status=='Pending'}">
+
+                        Pending
+
+                    </span>
+
+                </td>
+
+                <td class="action-buttons">
+
+                    <a class="edit-btn"
+                       th:href="@{/finance/edit/{id}(id=${finance.id})}">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </a>
+
+                    <a href="#"
+                       class="delete-btn"
+                       th:onclick="'deleteFinance(' + ${finance.id} + ');return false;'">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+    function clock(){
+
+        const d=new Date();
+
+        document.getElementById("clock").innerHTML=
+            d.toLocaleTimeString();
+
+    }
+
+    setInterval(clock,1000);
+
+    clock();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:src="@{/js/finance.js}"></script>
 
 </body>
 </html>
