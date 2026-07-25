@@ -1,10 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Transaction | SERMS</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/finance.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+
 <body>
+
+<div class="sidebar">
+
+    <div class="brand">
+        <span class="brand-dot"></span>
+        <div>
+            <h2>SERMS</h2>
+            <span>ENTERPRISE CONSOLE</span>
+        </div>
+    </div>
+
+    <div class="nav-group-label">OPERATE</div>
+
+    <nav>
+
+        <a th:href="@{/dashboard}">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+
+        <a th:href="@{/employees}">
+            <i class="fa-solid fa-users"></i>
+            Employees
+        </a>
+
+        <a th:href="@{/departments}">
+            <i class="fa-solid fa-building"></i>
+            Departments
+        </a>
+
+        <a th:href="@{/inventory}">
+            <i class="fa-solid fa-box"></i>
+            Inventory
+        </a>
+
+        <a th:href="@{/projects}">
+            <i class="fa-solid fa-diagram-project"></i>
+            Projects
+        </a>
+
+        <a th:href="@{/finance}" class="active">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            Finance
+        </a>
+
+    </nav>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+            <p class="eyebrow">FINANCE MODULE</p>
+            <h1>Edit Transaction</h1>
+        </div>
+
+    </div>
+
+    <div class="form-container">
+
+        <form th:action="@{/finance/update/{id}(id=${finance.id})}"
+              th:object="${finance}"
+              method="post"
+              class="finance-form">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Transaction Code</label>
+
+                    <input type="text"
+                           th:field="*{transactionCode}"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Transaction Type</label>
+
+                    <select th:field="*{transactionType}" required>
+                        <option value="Income">Income</option>
+                        <option value="Expense">Expense</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Category</label>
+
+                    <input type="text"
+                           th:field="*{category}"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Amount (LKR)</label>
+
+                    <input type="number"
+                           step="0.01"
+                           th:field="*{amount}"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Transaction Date</label>
+
+                    <input type="date"
+                           th:field="*{transactionDate}"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Payment Method</label>
+
+                    <select th:field="*{paymentMethod}">
+                        <option value="Cash">Cash</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Cheque">Cheque</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group full-width">
+
+                    <label>Description</label>
+
+                    <textarea th:field="*{description}"
+                              rows="4"></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Status</label>
+
+                    <select th:field="*{status}">
+                        <option value="Pending">Pending</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-buttons">
+
+                <button type="submit" class="save-btn">
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                    Update Transaction
+
+                </button>
+
+                <a th:href="@{/finance}" class="cancel-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
 
 </body>
 </html>
