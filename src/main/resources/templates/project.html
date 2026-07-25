@@ -1,75 +1,265 @@
-package com.serms.controller;
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-import com.serms.entity.Project;
-import com.serms.service.ProjectService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+<head>
 
-@Controller
-@RequestMapping("/projects")
-public class ProjectController {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-private final ProjectService projectService;
+    <title>Project Management | SERMS</title>
 
-public ProjectController(ProjectService projectService) {
-this.projectService = projectService;
-}
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/project.css}">
 
-@GetMapping
-public String listProjects(
-@RequestParam(value = "keyword", required = false) String keyword,
-Model model) {
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-model.addAttribute("projectList",
-projectService.searchProjects(keyword));
+</head>
 
-model.addAttribute("keyword", keyword);
+<body>
 
-return "project";
-}
+<!-- Sidebar -->
 
-@GetMapping("/add")
-public String showAddForm(Model model) {
+<div class="sidebar">
 
-model.addAttribute("project", new Project());
+    <div class="brand">
 
-return "project-add";
-}
+        <span class="brand-dot"></span>
 
-@PostMapping("/save")
-public String saveProject(@ModelAttribute Project project) {
+        <div>
 
-projectService.saveProject(project);
+            <h2>SERMS</h2>
 
-return "redirect:/projects";
-}
+            <span>ENTERPRISE CONSOLE</span>
 
-@GetMapping("/edit/{id}")
-public String editProject(@PathVariable Long id, Model model) {
+        </div>
 
-model.addAttribute("project",
-projectService.getProjectById(id));
+    </div>
 
-return "project-edit";
-}
+    <div class="nav-group-label">Operate</div>
 
-@PostMapping("/update/{id}")
-public String updateProject(@PathVariable Long id,
-@ModelAttribute Project project) {
+    <nav>
 
-project.setId(id);
+        <a th:href="@{/dashboard}">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
 
-projectService.updateProject(project);
+        <a th:href="@{/employees}">
+            <i class="fa-solid fa-users"></i>
+            Employees
+        </a>
 
-return "redirect:/projects";
-}
+        <a th:href="@{/departments}">
+            <i class="fa-solid fa-building"></i>
+            Departments
+        </a>
 
-@GetMapping("/delete/{id}")
-public String deleteProject(@PathVariable Long id) {
+        <a th:href="@{/inventory}">
+            <i class="fa-solid fa-box"></i>
+            Inventory
+        </a>
 
-projectService.deleteProject(id);
+        <a th:href="@{/projects}" class="active">
+            <i class="fa-solid fa-diagram-project"></i>
+            Projects
+        </a>
 
-return "redirect:/projects";
-}
-}
+        <a href="#">
+            <i class="fa-solid fa-money-bill"></i>
+            Finance
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-chart-column"></i>
+            Reports
+        </a>
+
+    </nav>
+
+    <div class="bottom-nav">
+
+        <nav>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a th:href="@{/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div class="topbar-heading">
+
+            <p class="eyebrow">PROJECT MODULE</p>
+
+            <h1>Project Management</h1>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <span class="clock" id="clock"></span>
+
+            <div class="profile-chip">
+
+                <span class="avatar">A</span>
+
+                <span class="role">
+                    Administrator
+                    <small>Full access</small>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="project-container">
+
+        <div class="project-header">
+
+            <h2>Projects</h2>
+
+            <div class="project-actions">
+
+                <form th:action="@{/projects}" method="get">
+
+                    <div class="search-wrapper">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                                type="text"
+                                class="search-box"
+                                name="keyword"
+                                th:value="${keyword}"
+                                placeholder="Search by Code, Project, Client or Manager">
+
+                    </div>
+
+                </form>
+
+                <a th:href="@{/projects/add}" class="add-btn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Project
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <table class="project-table">
+
+            <thead>
+
+            <tr>
+
+                <th>Code</th>
+                <th>Project</th>
+                <th>Client</th>
+                <th>Manager</th>
+                <th>Budget</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="project : ${projectList}">
+
+                <td th:text="${project.projectCode}"></td>
+
+                <td th:text="${project.projectName}"></td>
+
+                <td th:text="${project.clientName}"></td>
+
+                <td th:text="${project.projectManager}"></td>
+
+                <td th:text="'LKR ' + ${project.budget}"></td>
+
+                <td th:text="${project.priority}"></td>
+
+                <td>
+                    <span class="status"
+                          th:text="${project.status}">
+                    </span>
+                </td>
+
+                <td class="action-buttons">
+
+                    <a class="edit-btn"
+                       th:href="@{/projects/edit/{id}(id=${project.id})}">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </a>
+
+                    <a href="#"
+                       class="delete-btn"
+                       th:onclick="'deleteProject(' + ${project.id} + '); return false;'">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+    function tick(){
+
+        const clock=document.getElementById("clock");
+
+        const now=new Date();
+
+        clock.textContent=
+            now.toLocaleTimeString('en-GB',{hour12:false});
+
+    }
+
+    tick();
+
+    setInterval(tick,1000);
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:src="@{/js/project.js}"></script>
+
+</body>
+
+</html>
