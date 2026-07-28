@@ -1,10 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Reports - SERMS</title>
+
+    <link rel="stylesheet" th:href="@{/css/report.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
+<div class="container">
+
+    <h1>Finance Reports Dashboard</h1>
+
+    <!-- Summary Cards -->
+
+    <div class="cards">
+
+        <div class="card income">
+            <i class="fa-solid fa-money-bill-trend-up"></i>
+            <h3>Total Income</h3>
+            <h2 th:text="'LKR ' + ${totalIncome}"></h2>
+        </div>
+
+        <div class="card expense">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            <h3>Total Expense</h3>
+            <h2 th:text="'LKR ' + ${totalExpense}"></h2>
+        </div>
+
+        <div class="card balance">
+            <i class="fa-solid fa-wallet"></i>
+            <h3>Net Balance</h3>
+            <h2 th:text="'LKR ' + ${netBalance}"></h2>
+        </div>
+
+        <div class="card total">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <h3>Total Transactions</h3>
+            <h2 th:text="${totalTransactions}"></h2>
+        </div>
+
+    </div>
+
+    <!-- Chart -->
+
+    <div class="chart-card">
+
+        <h2>Income vs Expense</h2>
+
+        <canvas id="financeChart"></canvas>
+
+    </div>
+
+    <!-- Recent Transactions -->
+
+    <div class="table-card">
+
+        <h2>Recent Transactions</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>Code</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="finance : ${recentTransactions}">
+
+                <td th:text="${finance.transactionCode}"></td>
+
+                <td>
+
+    <span th:if="${finance.transactionType == 'Income'}"
+          style="color:#2ecc71;font-weight:bold;">
+        🟢 Income
+    </span>
+
+                    <span th:if="${finance.transactionType == 'Expense'}"
+                          style="color:#e74c3c;font-weight:bold;">
+        🔴 Expense
+    </span>
+
+                </td>
+
+                <td th:text="${finance.category}"></td>
+
+                <td th:text="'LKR ' + ${finance.amount}"></td>
+
+                <td th:text="${finance.transactionDate}"></td>
+
+                <td>
+                    <span class="status"
+                          th:classappend="${finance.status=='Completed'} ? ' completed' :
+                      (${finance.status=='Pending'} ? ' pending' : ' paid')"
+                          th:text="${finance.status}">
+</span>
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+
+    const income = Number(/*[[${incomeValue}]]*/ 0);
+    const expense = Number(/*[[${expenseValue}]]*/ 0);
+
+    const ctx = document.getElementById("financeChart");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["Income", "Expense"],
+            datasets: [{
+                label: "Amount (LKR)",
+                data: [income, expense],
+                backgroundColor: [
+                    "#2ecc71",
+                    "#e74c3c"
+                ],
+                borderColor: [
+                    "#27ae60",
+                    "#c0392b"
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+</script>
 
 </body>
 </html>
