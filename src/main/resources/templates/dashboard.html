@@ -89,17 +89,81 @@
     <div class="main">
 
         <div class="topbar">
-            ...
+
+            <!-- Existing Topbar -->
+
         </div>
 
-        <!-- Paste Employee Management here -->
+        <!-- Summary Cards -->
+        <div class="cards">
 
-        <div class="page-header">
-            ...
+            <div class="card" style="--accent:#4B5EFC;">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                </div>
+
+                <h3>Employees</h3>
+                <p th:text="${employeeCount}">0</p>
+            </div>
+
+            <div class="card" style="--accent:#8B5CF6;">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                </div>
+
+                <h3>Departments</h3>
+                <p th:text="${departmentCount}">0</p>
+            </div>
+
+            <div class="card" style="--accent:#F59E0B;">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                </div>
+
+                <h3>Projects</h3>
+                <p th:text="${projectCount}">0</p>
+            </div>
+
+            <div class="card" style="--accent:#14B8A6;">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+                </div>
+
+                <h3>Inventory</h3>
+                <p th:text="${inventoryCount}">0</p>
+            </div>
+
+            <div class="card" style="--accent:#10B981;">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+                </div>
+
+                <h3>Total Revenue</h3>
+                <p>
+                    LKR
+                    <span th:text="${#numbers.formatDecimal(totalRevenue,1,'COMMA',2,'POINT')}">
+                    0.00
+                </span>
+                </p>
+            </div>
+
         </div>
 
-        <div class="table-panel">
-            ...
+        <!-- Existing Modules Panel -->
+        <div class="lower-grid">
+
+            <!-- Your Modules panel -->
+
         </div>
 
     </div>
@@ -108,20 +172,73 @@
 
 
 
-        <div class="panel">
-            <div class="panel-head">
-                <h2>Modules</h2>
-                <a href="#" class="view-all">Manage →</a>
-            </div>
-            <ul class="module-list">
-                <li><span class="swatch" style="background:#4B5EFC"></span><span class="m-name">Employees</span><span class="m-value">120 active</span></li>
-                <li><span class="swatch" style="background:#8B5CF6"></span><span class="m-name">Departments</span><span class="m-value">8 units</span></li>
-                <li><span class="swatch" style="background:#E89B2E"></span><span class="m-name">Projects</span><span class="m-value">15 running</span></li>
-                <li><span class="swatch" style="background:#12B8A6"></span><span class="m-name">Inventory</span><span class="m-value">540 items</span></li>
-                <li><span class="swatch" style="background:#2F8FF0"></span><span class="m-name">Finance</span><span class="m-value">LKR 2.5M</span></li>
-                <li><span class="swatch" style="background:#F0508A"></span><span class="m-name">Reports</span><span class="m-value">12 generated</span></li>
-            </ul>
+    <div class="panel">
+
+        <div class="panel-head">
+            <h2>Modules</h2>
+            <a th:href="@{/dashboard}" class="view-all">Refresh →</a>
         </div>
+
+        <ul class="module-list">
+
+            <li>
+                <span class="swatch" style="background:#4B5EFC"></span>
+                <span class="m-name">Employees</span>
+                <span class="m-value"
+                      th:text="${employeeCount} + ' Employees'">
+                0 Employees
+            </span>
+            </li>
+
+            <li>
+                <span class="swatch" style="background:#8B5CF6"></span>
+                <span class="m-name">Departments</span>
+                <span class="m-value"
+                      th:text="${departmentCount} + ' Departments'">
+                0 Departments
+            </span>
+            </li>
+
+            <li>
+                <span class="swatch" style="background:#F59E0B"></span>
+                <span class="m-name">Projects</span>
+                <span class="m-value"
+                      th:text="${projectCount} + ' Projects'">
+                0 Projects
+            </span>
+            </li>
+
+            <li>
+                <span class="swatch" style="background:#14B8A6"></span>
+                <span class="m-name">Inventory</span>
+                <span class="m-value"
+                      th:text="${inventoryCount} + ' Items'">
+                0 Items
+            </span>
+            </li>
+
+            <li>
+                <span class="swatch" style="background:#2F8FF0"></span>
+                <span class="m-name">Finance</span>
+                <span class="m-value">
+                LKR
+                <span th:text="${#numbers.formatDecimal(totalRevenue,1,'COMMA',2,'POINT')}">
+                    0.00
+                </span>
+            </span>
+            </li>
+
+            <li>
+                <span class="swatch" style="background:#EC4899"></span>
+                <span class="m-name">Reports</span>
+                <span class="m-value">
+                Financial Dashboard
+            </span>
+            </li>
+
+        </ul>
+
+    </div>
 
     </div>
 

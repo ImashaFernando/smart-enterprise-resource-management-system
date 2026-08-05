@@ -18,4 +18,6 @@ public interface FinanceService {
 
     List<Finance> searchFinance(String keyword);
 
+    Double getTotalIncome();
+
 }

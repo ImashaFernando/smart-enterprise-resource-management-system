@@ -55,4 +55,8 @@ public class FinanceServiceImpl implements FinanceService {
                         keyword
                 );
     }
+    @Override
+    public Double getTotalIncome() {
+        return financeRepository.getTotalIncome();
+    }
 }
